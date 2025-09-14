@@ -1,5 +1,5 @@
 #import "@preview/js:0.1.3": *
-#import "../src/lib.typ": *
+#import "../lib.typ": *
 
 #show: js
 
