@@ -1,2 +1,2 @@
-#import "diff-function.typ": *
-#import "diff-content.typ": *
+#import "diff-function.typ": diff-string
+#import "diff-content.typ": diff-content

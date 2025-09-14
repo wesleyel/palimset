@@ -13,9 +13,7 @@
       arr = styled-text(val, arr)
     }
   } else if utils.is-styled(it) {
-    for val in it.children {
-      arr = styled-text(val, arr)
-    }
+    arr = styled-text(it.child, arr)
   } else if is-text(it) {
     arr.push(it.text)
   }
@@ -43,15 +41,15 @@
       output.push(tmp.at(0))
       arr = tmp.at(1)
     }
+    if output.len() == 0 {
+      return (none, arr)
+    }
     return (output.sum(), arr)
   } else if utils.is-styled(it) {
     let output = ()
-    for val in it.children {
-      let tmp = styled-output(val, arr, format-plus, format-minus)
-      output.push(tmp.at(0))
+      let tmp = styled-output(it.child, arr, format-plus, format-minus)
       arr = tmp.at(1)
-    }
-    return (output.sum(), arr)
+    return (utils.reconstruct-styled(it, tmp.at(0)), arr)
   } else if is-text(it) {
     let text_len = it.text.len()
     let start = 0
@@ -144,7 +142,7 @@
 #let diff-content(
   a,
   b,
-  format-plus: x => text(x, fill: blue),
+  format-plus: x => text(x, fill: blue, weight: "bold"),
   format-minus: x => strike(text(x, fill: red, size: 0.75em)),
 ) = {
   let arr_a = content-text(a).sum()

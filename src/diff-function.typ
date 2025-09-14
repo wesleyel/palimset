@@ -205,7 +205,7 @@
 #let diff-string(
   a,
   b,
-  format-plus: (x) => text(x, fill: blue),
+  format-plus: (x) => text(x, fill: blue, weight: "bold"),
   format-minus: (x) => strike(text(x, fill: red, size: 0.75em)),
 ) = {
   let data = diff-string-array(a, b)
