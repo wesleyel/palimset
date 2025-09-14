@@ -6,5 +6,4 @@ authors = ["Takeru Hashimoto"]
 license = "MIT"
 description = "A package that shows the differences between two documents."
 repository = "https://github.com/tkrhsmt/diff-doc"
-keywords = ["diff", "latexdiff"]
 exclude = ["example/"]
