@@ -3,7 +3,7 @@
 
 #show: js
 
-#let a = "world, こんばんは"
-#let b = "hello, こんにちは"
+#let a = "hello, workd. こんばんは"
+#let b = "hello, world. こんにちは"
 
 #diff-string(a, b)
