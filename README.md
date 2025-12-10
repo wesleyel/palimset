@@ -38,17 +38,19 @@ Compares two Typst contents and highlights the differences, preserving styles.
 
 ## Functions
 
-### `diff-string(a, b, format-plus, format-minus)`
+### `diff-string(a, b, format-plus, format-minus, split-regex)`
 
 - `a`, `b`: The two strings to compare.
-- `format-plus`: A function to format added text. Defaults to bold blue text.
-- `format-minus`: A function to format removed text. Defaults to struck-through red text.
+- `format-plus`: A function to format added text. (Default: `x => text(x, fill: blue, weight: "bold")`)
+- `format-minus`: A function to format removed text. (Default: `x => strike(text(x, fill: red, size: 0.75em))`)
+- `split-regex`: A regular expression string to split the strings for comparison. (Default: `"[^A-Za-z0-9]"`)
 
-### `diff-content(a, b, format-plus, format-minus)`
+### `diff-content(a, b, format-plus, format-minus, split-regex)`
 
 - `a`, `b`: The two Typst contents to compare.
-- `format-plus`: A function to format added text. Defaults to bold blue text.
-- `format-minus`: A function to format removed text. Defaults to struck-through red text.
+- `format-plus`: A function to format added text. (Default: `x => text(x, fill: blue, weight: "bold")`)
+- `format-minus`: A function to format removed text. (Default: `x => strike(text(x, fill: red, size: 0.75em))`)
+- `split-regex`: A regular expression string to split the contents for comparison. (Default: `"[^A-Za-z0-9]"`)
 
 ## License
 
