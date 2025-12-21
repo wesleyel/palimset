@@ -1,67 +1,78 @@
-#import "@preview/physica:0.9.5": *
-#set text(size: 10pt, font: "Harano Aji Mincho")
-#set par(justify: true)
-#set page(columns: 2)
+#import "@preview/charged-ieee:0.1.4": ieee
+#import "@preview/cetz:0.4.2" as cetz
 
-#show heading: it => {
-  text(it, font: "Harano Aji Gothic")
-}
-
-#place(
-  top + center,
-  float: true,
-  scope: "parent",
-  clearance: 2em,
-)[
-  #text(size: 15pt)[高回転数領域における準圧縮性渦構造の非線形発展に関する研究]
-
-  *Abstract*
-  #align(left)[
-    本テキストは，Chat GPTを用いて出鱈目に作成したものであり，内容の正確性は保証されない．
-    参考文献も同様である．
-    研究目的や手法の妥当性についても一切保証しない．
-    したがって，引用や参考にしないこと．
-  ]
-]
-
-= 概要
-
-本研究では，準圧縮性流体における高回転数領域での渦構造の非線形発展挙動を高精度数値シミュレーションにより詳細に解析した．
-特に，レイノルズ数が$R e > 10^5 $の条件下で発生する多重スケール渦構造の自己組織化現象に着目し，スペクトル法および大規模並列計算を組み合わせた解析手法を導入した．
-数値精度の検証には、既知解との比較も行った．
-その結果，従来理論では説明困難であったトロイダル渦環の非対称破壊メカニズムを明らかにした．
-
-= はじめに
-
-高回転数流れ場における渦構造の非線形挙動は，乱流遷移やエネルギー散逸過程の理解において極めて重要な役割を担う．
-従来，準圧縮性を仮定した解析では，マッハ数 $M a<0.3$を前提とした定常解析に限定されていた．しかし近年の数値流体力学の発展により，時間発展を考慮した非線形解析が可能となりつつある．
-本研究では，これらの手法を統合し，高回転領域における渦構造の時間発展と空間的自己組織化挙動を明らかにすることを目的とする
-このような制約は，高回転数条件における非定常現象の理解を困難にしていた．
-
-= 数値手法
-本解析では，Navier-Stokes方程式に準圧縮性近似を導入し，以下の支配方程式を解いた：
-$
-  pdv(u_i, t) + u_j pdv(u_i, x_j) = -1/rho pdv(p, x_i) + nu pdv(u_i, x_j, x_j)\
-  pdv(u_i, x_i) = epsilon(x, t)
-$
-ここで，$epsilon(x,t)$は準圧縮性を表す微小な発散項である．
-空間離散にはChebyshevスペクトル法とFourier変換を併用し，時間積分には4次のRunge-Kutta法を適用した
-格子解像度は$512^3$とし，並列計算はMPIおよびOpenMPを併用したクラスタ環境上で実行した．
-
-= 結果
-渦の初期分布として，ガウス型のトロイダル渦を与えた結果，初期には軸対称構造が保たれていたが，時間とともに非線形的な不安定性が発生し，最終的には非対称な渦環分裂現象が観察された（図1）．
-特に，エネルギースペクトルにおいて $k^(-5\/3)$ スケーリングが一時的に出現する現象が確認され，このスケーリングは乱流的自己相似構造の兆候と解釈される．
-
-#figure(
-  rect(width: 90%, height: 20%),
-  caption: [高回転数準圧縮性渦構]
+#show: ieee.with(
+  title: [Complex Document Example],
+  authors: (
+    (
+      name: "Example Author",
+      department: [Department of Examples],
+      organization: [Example University],
+      location: [Example City, EX 12345, Country],
+      email: "diff-doc@example.edu"
+    ),
+  ),
+  abstract: [
+    This is an example of a complex document created using the typographic markup language.
+    It includes sections such as Abstract, Introduction, Numerical Methods, Results, Discussion, and Conclusion, along with mathematical equations and figures.
+  ],
+  index-terms: ("Scientific writing", "Typesetting", "Document creation", "Syntax"),
 )
 
-= 考察
-得られた非対称渦環の破壊メカニズムは，非線形渦間相互作用による位相同期の破綻に起因すると考えられる．
-これは，従来のケルビン・ヘルムホルツ不安定性とは異なる新しい非線形過程を示唆する．
-また，準圧縮性の影響により音波の発生が抑制され，エネルギーがより小スケール構造に集中する傾向が見られた．これらの結果は，既存の線形安定性理論では予測されないものであり，新たな乱流遷移機構の可能性を示唆している．
+= Introduction
 
-= 結論
-本研究では，高回転数条件下における準圧縮性渦構造の非線形発展を数値的に解析し，従来報告のない非対称破壊メカニズムを明らかにした．
-今後は，より高解像度での解析や，実験的検証を通じた理論の発展が求められる．
+This section serves as an introduction to a largely fictional study.
+The purpose of this document is not to address a real scientific problem, but to provide a clear and well-structured example text for testing document comparison tools.
+Despite its meaningless content, the writing style follows common conventions found in academic publications.
+
+The reader is encouraged not to search for physical interpretations or deep mathematical rigor in the following sections.
+
+
+= Example of Mathematical Expressions
+
+In this section, we present several mathematical expressions that resemble those commonly used in scientific articles.
+
+A representative equation is given by
+$
+  f(x) = alpha x^2 + beta x + gamma
+$
+where $alpha$, $beta$, and $gamma$ are arbitrary constants with no particular physical meaning.
+
+Another example involves a summation:
+$
+  S = sum_(k=1)^N k^2
+$
+which is introduced solely to demonstrate the appearance of inline
+and displayed mathematical formulas in a document.
+
+= Example of Figures
+
+Figures are essential components of technical documents,
+even when the data being visualized are entirely artificial.
+
+#figure(
+  cetz.canvas({
+    import cetz.draw: *
+
+    merge-path({
+      for x in range(80).map(n => 0.1*n){
+        line((x, calc.sin(x)), (x+0.1, calc.sin(x+0.1)))
+      }
+    })
+  }),
+  caption: [figure sample]
+)<fig-sample>
+
+@fig-sample illustrates a hypothetical relationship between two variables.
+Although the plotted curve appears smooth and well-behaved, it is generated using simple mathematical functions without any empirical basis.
+
+All figures included in this document should be interpreted
+as placeholders rather than meaningful results.
+
+= Conclusion
+
+This document has presented a fabricated example of an academic-style text.
+It included an introduction, mathematical expressions, a brief description of figures, and a concluding section.
+
+The primary goal was to create a structured document suitable for testing diff tools and document comparison workflows.
+Future revisions may introduce small textual changes in order to generate visible and instructive differences.
