@@ -1,4 +1,4 @@
-#let lcs_getv_status(v_minus, v_plus) = {
+#let lcs-getv-status(v_minus, v_plus) = {
   if (v_minus.p == none) and (v_plus.p == none) {
     return 0
   }
@@ -17,7 +17,7 @@
 }
 
 
-#let lcs_character(a, b) = {
+#let lcs-character(a, b) = {
   let a_num = a.len()
   let b_num = b.len()
   let all_num = a_num + b_num
@@ -36,7 +36,7 @@
       let x = 0
       let y = 0
       let parent = none
-      let check = lcs_getv_status(v.at(index - 1), v.at(index + 1))
+      let check = lcs-getv-status(v.at(index - 1), v.at(index + 1))
 
       if check == 0 {
         x = 0
@@ -65,8 +65,8 @@
   }
 }
 
-#let lcs_output(a, b) = {
-  let tree = lcs_character(a, b)
+#let lcs-output(a, b) = {
+  let tree = lcs-character(a, b)
   let output = ()
   let output_int = ()
 
@@ -187,7 +187,7 @@
 ) = {
   let a_words = split_words(a, reg)
   let b_words = split_words(b, reg)
-  let output = lcs_output(a_words, b_words)
+  let output = lcs-output(a_words, b_words)
   return output
 }
 
