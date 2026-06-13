@@ -25,13 +25,17 @@
 
   let offset = b_num + 1
 
-  for d in range(all_num) {
+  // Myers diff needs d up to all_num inclusive; range(all_num) stops one
+  // short and returns none for short inline diffs (e.g. "workd" vs "world").
+  for d in range(all_num + 1) {
     let k_max = d
     let k_min = d
     if (d > a_num) { k_max = a_num - (d - a_num) }
     if (d > b_num) { k_min = b_num - (d - b_num) }
 
-    for k in range(-k_min, k_max, step: 2) {
+    // range end is exclusive; without +1, k = +d is skipped when k_min = k_max
+    // (e.g. d = 1 only visits k = -1, never k = +1).
+    for k in range(-k_min, k_max + 1, step: 2) {
       let index = offset + k
       let x = 0
       let y = 0
@@ -158,23 +162,24 @@
 
 #let split_words(str, reg) = {
   let reg1 = regex(reg)
-
   let str_arr = str.clusters()
   let output_arr = ()
-  let str = ""
+  let buf = ""
 
   for char in str_arr {
     if reg1 in char {
-      str += char
-      output_arr.push(str)
-      str = ""
+      if buf != "" {
+        output_arr.push(buf)
+        buf = ""
+      }
+      output_arr.push(char)
     } else {
-      str += char
+      buf += char
     }
   }
 
-  if str != "" {
-    output_arr.push(str)
+  if buf != "" {
+    output_arr.push(buf)
   }
 
   return output_arr
@@ -191,6 +196,50 @@
   return output
 }
 
+#let is-blank-chunk(contents) = {
+  for char in contents.clusters() {
+    if char != "\n" and char != " " {
+      return false
+    }
+  }
+  true
+}
+
+#let render-diff-chunk(contents, kind, format-plus, format-minus) = {
+  if contents == "" {
+    return none
+  }
+  if is-blank-chunk(contents) {
+    let output = ()
+    for char in contents.clusters() {
+      if char == "\n" {
+        output.push(parbreak())
+      } else {
+        output.push(text(char))
+      }
+    }
+    return if output.len() == 0 { none } else { output.sum() }
+  }
+  if kind == 0 {
+    text(contents)
+  } else if kind == 1 {
+    format-plus(contents)
+  } else {
+    format-minus(contents)
+  }
+}
+
+#let diff-render(data, format-plus, format-minus) = {
+  for value in range(data.at(0).len()) {
+    render-diff-chunk(
+      data.at(0).at(value),
+      data.at(1).at(value),
+      format-plus,
+      format-minus,
+    )
+  }
+}
+
 #let diff-string(
   a,
   b,
@@ -199,16 +248,5 @@
   split-regex: "[^A-Za-z0-9]",
 ) = {
   let data = diff-string-array(a, b, split-regex)
-
-  for value in range(data.at(0).len()) {
-    let contents = data.at(0).at(value)
-    let number = data.at(1).at(value)
-    if number == 0 {
-      text(contents)
-    } else if number == 1 {
-      format-plus(contents)
-    } else {
-      format-minus(contents)
-    }
-  }
+  diff-render(data, format-plus, format-minus)
 }
